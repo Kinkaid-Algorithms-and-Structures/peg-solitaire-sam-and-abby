@@ -12,5 +12,19 @@ class Board:
         self.board[4]=[(11,True),blank,(12,True),blank,(13,True),blank,(14,True),blank,(15,True)]
     def move(self,id1,id2):
         pass
+    def check_if_legal(self,x1,y1,direction):
+        point1=self.board[y1][x1]
+        if(point1[1]):
+            if direction=="right":
+                point2=self.board[y1][x1+2]
+                if(point2[0]==0):
+                    return False
+                elif(point2[1]):
+                    return False
+                else:
+
+
+
+
 
 
