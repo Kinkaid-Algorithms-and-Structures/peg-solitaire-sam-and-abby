@@ -12,17 +12,49 @@ class Board:
         self.board[4]=[(11,True),blank,(12,True),blank,(13,True),blank,(14,True),blank,(15,True)]
     def move(self,id1,id2):
         pass
+
     def check_if_legal(self,x1,y1,direction):
         point1=self.board[y1][x1]
-        if(point1[1]):
+        if point1[1]:
             if direction=="right":
-                point2=self.board[y1][x1+2]
-                if(point2[0]==0):
+                if x1>=5 :
                     return False
-                elif(point2[1]):
+                point2=self.board[y1][x1+4]
+                midpoint=self.board[y1][x1+2]
+            elif direction=="left":
+                if x1<=3:
                     return False
-                else:
-
+                point2 = self.board[y1][x1 - 4]
+                midpoint = self.board[y1][x1 - 2]
+            elif direction=="top right":
+                if x1>=7 and y1<=1 :
+                    return False
+                point2 = self.board[y1-2][x1 +2]
+                midpoint = self.board[y1-1][x1 +1]
+            elif direction=="top left":
+                if x1<=1 and y1<=1:
+                    point2 = self.board[y1-2][x1 - 2]
+                    midpoint = self.board[y1-1][x1 - 1]
+            elif direction=="bottom right":
+                if x1>=7 and y1<=3 :
+                    return False
+                point2 = self.board[y1+2][x1 +2]
+                midpoint = self.board[y1+1][x1 +1]
+            elif direction=="bottom left":
+                if x1 <= 1 and y1 <= 3:
+                    return False
+                point2 = self.board[y1 + 2][x1 - 2]
+                midpoint = self.board[y1 + 1][x1 - 1]
+            else:
+                return False
+            if point2[0] == 0:
+                return False
+            elif point2[1]:
+                return False
+            elif not midpoint[1]:
+                return False
+            else:
+                return True
 
 
 
