@@ -6,6 +6,21 @@ from Board import Board
 logging.basicConfig(level=logging.INFO)
 
 
+    def count_pegs(self):
+        # Count how many pegs are left on the board
+        return sum(row.count('o') for row in self.board)
+
+    def has_any_legal_moves(self):
+        # Check if there are any legal moves left on the board
+        directions = ['up', 'down', 'left', 'right']
+        for x1 in range(5):
+            for y1 in range(5):
+                if self.board[x1][y1] == 'o':  # find pegs
+                    for direction in directions:
+                        if self.is_move_legal(x1, y1, direction):
+                            return True
+        return False
+
 class PegSolitaireRunner:
     def __init__(self):
         logging.info("Initializing Peg Solitaire Game")
@@ -13,7 +28,7 @@ class PegSolitaireRunner:
 
     @log_start_stop_method
     def play_game(self):
-        ## move and check if legal input is the x and the y coordinate of the peg youre trying to move and the direction as a string you are trying to move
+        ## move and check if legal input is the x and the y coordinate of the peg you're trying to move and the direction as a string you are trying to move
         while True:  # simple loop --> needs more conditions based on actual game rules
             self.board.draw()
             move = self.board.move().split()
@@ -29,7 +44,14 @@ class PegSolitaireRunner:
                 break
 
     def check_game_over(self):
-        # placeholder for game over logic
+        # Game over if only one peg is left or no legal moves remain
+        peg_count = self.board.count_pegs()
+        if peg_count == 1:
+            print("Congratulations, you won!")
+            return True
+        if not self.board.has_any_legal_moves():
+            print("No legal moves left. You lost.")
+            return True
         return False
 
 if __name__ == "__main__":
