@@ -21,16 +21,25 @@ class Board:
             print(' '.join(row))
 
     def ask_for_move(self):
-        return input("Enter your move (format 'x1 y1 x2 y2'): ") ## print without gaps --> x1, y1 direction
+        return input("Enter your move (format 'x1 y1 direction'): ")  ## change to include direction
 
-    def make_move(self, x1, y1, x2, y2):
+    def make_move(self, x1, y1, direction):
         # is this right?
+        directions = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}
+        dx, dy = directions[direction]
+        x2, y2 = x1 + 2 * dx, y1 + 2 * dy
         self.board[x2][y2] = 'o'
         self.board[x1][y1] = '_'
+        self.board[x1 + dx][y1 + dy] = '_'  # remove the jumped peg
 
-    def is_move_legal(self, x1, y1, x2, y2):
+    def is_move_legal(self, x1, y1, direction):
         # add the logic to check if a move is legal
-        return True
+        directions = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}
+        dx, dy = directions[direction]
+        x2, y2 = x1 + 2 * dx, y1 + 2 * dy
+        if 0 <= x2 < 5 and 0 <= y2 < 5 and self.board[x1 + dx][y1 + dy] == 'o' and self.board[x2][y2] == '_':
+            return True
+        return False
 
 class PegSolitaireRunner:
     def __init__(self):
@@ -43,10 +52,10 @@ class PegSolitaireRunner:
         while True:  # simple loop --> needs more conditions based on actual game rules
             self.board.draw()
             move = self.board.ask_for_move().split()
-            x1, y1, x2, y2 = map(int, move)
-            if self.board.is_move_legal(x1, y1, x2, y2):
-                self.board.make_move(x1, y1, x2, y2)
-                logging.info(f"Move from ({x1}, {y1}) to ({x2}, {y2}) executed.")
+            x1, y1, direction = int(move[0]), int(move[1]), move[2]
+            if self.board.is_move_legal(x1, y1, direction):
+                self.board.make_move(x1, y1, direction)
+                logging.info(f"Move from ({x1}, {y1}) in direction '{direction}' executed.")
             else:
                 logging.info("Illegal move attempted.")
                 print("Illegal move. Try again.")
