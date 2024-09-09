@@ -4,7 +4,6 @@ from KinkaidDecorators import log_start_stop_method
 
 logging.basicConfig(level=logging.INFO)
 
-
 class Board:
     def __init__(self):
         self.board = [['_'] * 5 for _ in range(5)]  # example board setup (adjust size and initialization as necessary)
@@ -20,10 +19,9 @@ class Board:
     def draw(self):
         for row in self.board:
             print(' '.join(row))
-        print()
 
     def ask_for_move(self):
-        return input("Enter your move (format 'x1 y1 x2 y2'): ")
+        return input("Enter your move (format 'x1 y1 x2 y2'): ") ## print without gaps --> x1, y1 direction
 
     def make_move(self, x1, y1, x2, y2):
         # is this right?
@@ -41,6 +39,7 @@ class PegSolitaireRunner:
 
     @log_start_stop_method
     def play_game(self):
+        ## move and check if legal input is the x and the y coordinate of the peg youre trying to move and the direction as a string you are trying to move
         while True:  # simple loop --> needs more conditions based on actual game rules
             self.board.draw()
             move = self.board.ask_for_move().split()
@@ -62,28 +61,3 @@ class PegSolitaireRunner:
 if __name__ == "__main__":
     game = PegSolitaireRunner()
     game.play_game()
-
-
-
-## howe's stuff
-# import logging, datetime
-# from KinkaidDecorators import log_start_stop_method
-#
-# logging.basicConfig(level=logging.INFO)  # simple version to the output console
-# # logging.basicConfig(level=logging.DEBUG, filename=f"log {datetime.datetime.now():%m-%d@%H:%M:%S}.txt",
-# #                     format="%(asctime)s %(levelname)s %(message)s",
-# #                     datefmt="%H:%M:%S %p --- ")  # more robust, sent to a file cNode = Tuple[int, T]
-#
-# class PegSolitaireRunner:
-#     def __init__(self):
-#         logging.info("Initializing.")
-#         # add any code you want to set up variables for the game.
-#
-#     @log_start_stop_method
-#     def play_game(self):  # note: this is complaining (grey underline) that it could be static because it doesn't use
-#         # any variables or methods from "self." Once you do, it will stop pestering you about it.
-#         pass
-#
-# if __name__ == "__main__":
-#     game = PegSolitaireRunner()
-#     game.play_game()
