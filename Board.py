@@ -72,6 +72,16 @@ class Board:
                     counter+=1
         return counter
 
+    def has_any_legal_moves(self):
+        # Check if there are any legal moves left on the board
+        directions = ['top right', 'down', 'left', 'right']
+        for row in self.board:
+            for column in row:
+                if self.board[row][column][1]:  # find pegs
+                    for direction in directions:
+                        if self.check_if_legal(row, column, direction):
+                            return True
+            return False
     def draw(self):
         for row in self.board:
             print(' '.join(['o' if col[1] else '.' for col in row]))
