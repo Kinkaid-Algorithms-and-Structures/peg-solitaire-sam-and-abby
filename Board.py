@@ -82,6 +82,10 @@ class Board:
                         if self.check_if_legal(row, column, direction):
                             return True
             return False
+    def draw(self):
+        for row in self.board:
+            print(' '.join(['o' if col[1] else '.' for col in row]))
+
 
 
 
