@@ -6,20 +6,21 @@ from Board import Board
 logging.basicConfig(level=logging.INFO)
 
 
-    def count_pegs(self):
-        # Count how many pegs are left on the board
-        return sum(row.count('o') for row in self.board)
+def count_pegs(self):
+    # Count how many pegs are left on the board
+    return sum(1 for row in self.board for peg in row if peg[1])
 
-    def has_any_legal_moves(self):
-        # Check if there are any legal moves left on the board
-        directions = ['up', 'down', 'left', 'right']
-        for x1 in range(5):
-            for y1 in range(5):
-                if self.board[x1][y1] == 'o':  # find pegs
-                    for direction in directions:
-                        if self.is_move_legal(x1, y1, direction):
-                            return True
-        return False
+def has_any_legal_moves(self):
+    # Check if there are any legal moves left on the board
+    directions = ['right', 'left', 'top right', 'top left', 'bottom right', 'bottom left']
+    for y1, row in enumerate(self.board):
+        for x1, peg in enumerate(row):
+            if peg[1]:  # Checking if the peg is present
+                for direction in directions:
+                    if self.check_if_legal(x1, y1, direction)[0]:  # Assuming check_if_legal returns a tuple where the first item is a boolean indicating legality
+                        return True
+    return False
+
 
 class PegSolitaireRunner:
     def __init__(self):
