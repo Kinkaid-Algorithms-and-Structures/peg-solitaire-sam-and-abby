@@ -1,7 +1,7 @@
 class Board:
     def __init__(self):
         self.board=[]
-        for i in range(0,4):
+        for i in range(0,5):
             new_row=[]
             self.board.append(new_row)
         blank=[0,False]
@@ -24,6 +24,8 @@ class Board:
     def check_if_legal(self,x1,y1,direction):
         point1=self.board[y1][x1]
         blank = (0,0)
+        point2=blank
+        midpoint=blank
         if point1[1]:
             if direction=="right":
                 if x1>=5 :
@@ -66,17 +68,17 @@ class Board:
                 return True, midpoint, point2
     def count_pegs(self):
         counter= 0
-        for row in self.board:
-            for column in row:
+        for row in range(0,len(self.board)):
+            for column in range(0,len(self.board[row])):
                 if self.board[row][column][1]:
                     counter+=1
         return counter
 
     def has_any_legal_moves(self):
         # Check if there are any legal moves left on the board
-        directions = ['top right', 'down', 'left', 'right']
-        for row in self.board:
-            for column in row:
+        directions = ['top right', 'top left', 'bottom right', 'bottom left', 'left', 'right']
+        for row in range(0,len(self.board)):
+            for column in range(0,len(self.board[row])):
                 if self.board[row][column][1]:  # find pegs
                     for direction in directions:
                         if self.check_if_legal(row, column, direction):
