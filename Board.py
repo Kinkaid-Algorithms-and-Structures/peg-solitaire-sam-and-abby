@@ -22,6 +22,7 @@ class Board:
 
 
     def check_if_legal(self,x1,y1,direction):
+        print(f"{y1=}\t{x1=}")
         point1=self.board[y1][x1]
         blank = (0,0)
         point2=blank
@@ -38,21 +39,21 @@ class Board:
                 point2 = self.board[y1][x1 - 4]
                 midpoint = self.board[y1][x1 - 2]
             elif direction=="top right":
-                if x1>=7 and y1<=1 :
+                if x1>=6 or y1<=1 :
                     return False, blank, blank
                 point2 = self.board[y1-2][x1 +2]
                 midpoint = self.board[y1-1][x1 +1]
             elif direction=="top left":
-                if x1<=1 and y1<=1:
+                if x1<=1 or y1<=1:
                     point2 = self.board[y1-2][x1 - 2]
                     midpoint = self.board[y1-1][x1 - 1]
             elif direction=="bottom right":
-                if x1>=7 and y1<=3 :
+                if x1>=7 or y1<=3 :
                     return False, blank, blank
                 point2 = self.board[y1+2][x1 +2]
                 midpoint = self.board[y1+1][x1 +1]
             elif direction=="bottom left":
-                if x1 <= 1 and y1 <= 3:
+                if x1 <= 1 or y1 <= 3:
                     return False, blank, blank
                 point2 = self.board[y1 + 2][x1 - 2]
                 midpoint = self.board[y1 + 1][x1 - 1]
@@ -77,16 +78,20 @@ class Board:
     def has_any_legal_moves(self):
         # Check if there are any legal moves left on the board
         directions = ['top right', 'top left', 'bottom right', 'bottom left', 'left', 'right']
+       # print(len(self.board))
         for row in range(0,len(self.board)):
+           # print(len(self.board[row]))
             for column in range(0,len(self.board[row])):
                 if self.board[row][column][1]:  # find pegs
+                    #print("WEEEE WOOO")
                     for direction in directions:
-                        if self.check_if_legal(row, column, direction):
+                        if self.check_if_legal(row, column, direction)[0]:
                             return True
-            return False
+        return False
     def draw(self):
         for row in self.board:
             print(' '.join(['o' if col[1] else '.' for col in row]))
+
 
 
 

@@ -9,7 +9,7 @@ import datetime
 from KinkaidDecorators import log_start_stop_method
 from Board import Board
 
-logging.basicConfig(level=logging.INFO)
+#logging.basicConfig(level=logging.INFO)
 
 
 
