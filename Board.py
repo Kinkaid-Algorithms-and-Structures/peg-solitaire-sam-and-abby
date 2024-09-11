@@ -72,6 +72,10 @@ class Board:
                     counter+=1
         return counter
 
+    def draw(self):
+        for row in self.board:
+            print(' '.join(['o' if col[1] else '.' for col in row]))
+
 
 
 
