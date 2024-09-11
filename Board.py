@@ -22,7 +22,7 @@ class Board:
 
 
     def check_if_legal(self,x1,y1,direction):
-        print(f"{y1=}\t{x1=}")
+        #print(f"{y1=}\t{x1=}")
         point1=self.board[y1][x1]
         blank = (0,0)
         point2=blank
@@ -85,7 +85,8 @@ class Board:
                 if self.board[row][column][1]:  # find pegs
                     #print("WEEEE WOOO")
                     for direction in directions:
-                        if self.check_if_legal(row, column, direction)[0]:
+                        #print(f"{row=}")
+                        if self.check_if_legal(column, row, direction)[0]:
                             return True
         return False
     def draw(self):
