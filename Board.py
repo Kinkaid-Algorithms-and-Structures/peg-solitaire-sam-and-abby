@@ -64,6 +64,15 @@ class Board:
                 return False, blank, blank
             else:
                 return True, midpoint, point2
+    def count_pegs(self):
+        counter= 0
+        for row in self.board:
+            for column in row:
+                if self.board[row][column][1]:
+                    counter+=1
+        return counter
+
+
 
 
 
