@@ -64,10 +64,6 @@ class Board:
                 return False, blank, blank
             else:
                 return True, midpoint, point2
-    def draw(self):
-        for row in self.board:
-            for column in row:
-                pass
 
 
 
