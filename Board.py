@@ -10,7 +10,7 @@ class Board:
         self.board[2]=[blank,blank,[4,True],blank,[5,True],blank,[6,True],blank,blank]
         self.board[3]=[blank,[7,True],blank,[8,True],blank,[9,True],blank,[10,True],blank]
         self.board[4]=[[11,True],blank,[12,True],blank,[13,True],blank,[14,True],blank,[15,True]]
-    def move(self, x1,y1, direction):
+    def move(self, x1:int,y1:int, direction:str):
         #assumes the move has already been checked by check_if_legal
         point1 = self.board[y1][x1]
         point2= self.check_if_legal(x1,y1, direction)[2]
@@ -21,10 +21,10 @@ class Board:
 
 
 
-    def check_if_legal(self,x1,y1,direction):
+    def check_if_legal(self,x1:int,y1:int,direction:str)->tuple[bool,list,list]:
         #print(f"{y1=}\t{x1=}")
         point1=self.board[y1][x1]
-        blank = (0,0)
+        blank = [0,0]
         point2=blank
         midpoint=blank
         if point1[1]:
@@ -67,7 +67,7 @@ class Board:
                 return False, blank, blank
             else:
                 return True, midpoint, point2
-    def count_pegs(self):
+    def count_pegs(self)->int:
         counter= 0
         for row in range(0,len(self.board)):
             for column in range(0,len(self.board[row])):
@@ -75,7 +75,7 @@ class Board:
                     counter+=1
         return counter
 
-    def has_any_legal_moves(self):
+    def has_any_legal_moves(self)->bool:
         # Check if there are any legal moves left on the board
         directions = ['top right', 'top left', 'bottom right', 'bottom left', 'left', 'right']
        # print(len(self.board))
