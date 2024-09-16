@@ -45,15 +45,16 @@ class Board:
                 midpoint = self.board[y1-1][x1 +1]
             elif direction=="top left":
                 if x1<=1 or y1<=1:
-                    point2 = self.board[y1-2][x1 - 2]
-                    midpoint = self.board[y1-1][x1 - 1]
+                    return False, blank,blank
+                point2 = self.board[y1-2][x1 - 2]
+                midpoint = self.board[y1-1][x1 - 1]
             elif direction=="bottom right":
                 if x1>=7 or y1<=3 :
                     return False, blank, blank
                 point2 = self.board[y1+2][x1 +2]
                 midpoint = self.board[y1+1][x1 +1]
             elif direction=="bottom left":
-                if x1 <= 1 or y1 <= 3:
+                if x1 <= 1 or y1 >= 3:
                     return False, blank, blank
                 point2 = self.board[y1 + 2][x1 - 2]
                 midpoint = self.board[y1 + 1][x1 - 1]
