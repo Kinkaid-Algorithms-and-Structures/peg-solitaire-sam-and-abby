@@ -10,7 +10,7 @@ class Referee:
             try:
                 x1 = int(input("Enter the x coordinate of the peg you want to move: "))
                 y1 = int(input("Enter the y coordinate of the peg you want to move: "))
-                direction = input("Enter the direction of the move (e.g., 'right', 'left', 'top right', etc.): ")
+                direction = input("Enter the direction of the move (e.g., 'right', 'top left','bottom right' etc.): ")
 
                 if self.board.check_if_legal(x1, y1, direction)[0]:  # checking move legality
                     self.board.move(x1, y1, direction)
