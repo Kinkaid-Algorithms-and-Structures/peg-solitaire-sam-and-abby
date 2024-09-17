@@ -22,7 +22,7 @@ class Board:
 
 
     def check_if_legal(self,x1:int,y1:int,direction:str)->tuple[bool,list,list]:
-        #print(f"{y1=}\t{x1=}")
+        #print(f'{y1=} at start')
         point1=self.board[y1][x1]
         blank = [0,0]
         point2=blank
@@ -43,14 +43,16 @@ class Board:
                     return False, blank, blank
                 point2 = self.board[y1-2][x1 +2]
                 midpoint = self.board[y1-1][x1 +1]
+                #print("move is legal")
             elif direction=="top left":
                 if x1<=1 or y1<=1:
                     return False, blank,blank
                 point2 = self.board[y1-2][x1 - 2]
                 midpoint = self.board[y1-1][x1 - 1]
             elif direction=="bottom right":
-                if x1>=7 or y1<=3 :
+                if x1>=7 or y1>=3 :
                     return False, blank, blank
+                #print(f'{y1=}')
                 point2 = self.board[y1+2][x1 +2]
                 midpoint = self.board[y1+1][x1 +1]
             elif direction=="bottom left":
